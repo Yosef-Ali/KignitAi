@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
 import { useApiKey } from './hooks/useApiKey';
 import { useMusicGenerator, Track } from './hooks/useMusicGenerator';
+import { KIGNIT_CONFIGS, INSTRUMENTS } from './lib/kignitPromptBuilder';
 
 const KIGNITS = [
   { id: 'Tizita', name: 'Tizita', desc: 'Nostalgic, Longing', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30' },
@@ -27,6 +28,8 @@ export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [vocalMode, setVocalMode] = useState<'auto' | 'instrumental' | 'with-vocals'>('instrumental');
   const [selectedModel, setSelectedModel] = useState<'lyria-3-pro-preview' | 'lyria-3-clip-preview'>('lyria-3-pro-preview');
+  const [tempo, setTempo] = useState(75);
+  const [selectedInstruments, setSelectedInstruments] = useState<string[]>(['krar']);
   
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -70,6 +73,8 @@ export default function App() {
       userPrompt: prompt,
       vocalMode: vocalMode,
       model: selectedModel,
+      tempo: tempo,
+      instruments: selectedInstruments,
     });
     if (newTrack) {
       setTracks(prev => {
@@ -305,6 +310,42 @@ export default function App() {
                             )}>{mode === 'with-vocals' ? 'Vocals' : mode === 'instrumental' ? 'No Vocals' : 'Auto'}</button>
                         ))}
                       </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-gray-400 uppercase tracking-wider">Tempo: {tempo} BPM</label>
+                    <input
+                      type="range" min={40} max={180} value={tempo}
+                      onChange={(e) => setTempo(Number(e.target.value))}
+                      className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-amber-500 [&::-webkit-slider-thumb]:rounded-full"
+                    />
+                    <div className="flex justify-between text-xs text-gray-600">
+                      <span>Slow 40</span><span>Medium 100</span><span>Fast 180</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-gray-400 uppercase tracking-wider">Instruments</label>
+                    <div className="flex flex-wrap gap-2">
+                      {Object.values(INSTRUMENTS).map(inst => {
+                        const isSelected = selectedInstruments.includes(inst.id);
+                        return (
+                          <button key={inst.id} type="button"
+                            onClick={() => setSelectedInstruments(prev =>
+                              isSelected ? prev.filter(id => id !== inst.id) : [...prev, inst.id]
+                            )}
+                            className={cn(
+                              "px-3 py-1.5 rounded-lg border text-xs font-medium transition-all",
+                              isSelected
+                                ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
+                                : "border-white/10 text-gray-500 hover:text-gray-300 hover:bg-white/5"
+                            )}
+                          >
+                            {inst.name} <span className="opacity-60">{inst.nameAmharic}</span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
