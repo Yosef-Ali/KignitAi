@@ -25,6 +25,8 @@ export default function App() {
   const [prompt, setPrompt] = useState('');
   const [selectedKignit, setSelectedKignit] = useState(KIGNITS[0].id);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [vocalMode, setVocalMode] = useState<'auto' | 'instrumental' | 'with-vocals'>('auto');
+  const [selectedModel, setSelectedModel] = useState<'lyria-3-pro-preview' | 'lyria-3-clip-preview'>('lyria-3-pro-preview');
   
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -63,9 +65,22 @@ export default function App() {
     e.preventDefault();
     if (!prompt.trim() || isGenerating) return;
     
-    const newTrack = await generate(prompt, selectedKignit);
+    const newTrack = await generate({
+      kignit: selectedKignit,
+      userPrompt: prompt,
+      vocalMode: vocalMode,
+      model: selectedModel,
+    });
     if (newTrack) {
-      setTracks(prev => [newTrack, ...prev]);
+      setTracks(prev => {
+        const updated = [newTrack, ...prev];
+        // Cap at 20 tracks and revoke URLs for dropped entries to free memory
+        if (updated.length > 20) {
+          const dropped = updated.splice(20);
+          dropped.forEach(t => URL.revokeObjectURL(t.audioUrl));
+        }
+        return updated;
+      });
       setCurrentTrack(newTrack);
       setIsPlaying(true);
       setPrompt('');
@@ -264,6 +279,32 @@ export default function App() {
                           <div className="text-xs opacity-80">{kignit.desc}</div>
                         </button>
                       ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-gray-400 uppercase tracking-wider">Options</label>
+                    <div className="flex flex-wrap gap-3">
+                      {/* Model picker */}
+                      <div className="flex rounded-lg border border-white/10 overflow-hidden">
+                        <button type="button" onClick={() => setSelectedModel('lyria-3-clip-preview')}
+                          className={cn("px-3 py-2 text-xs font-medium transition-colors",
+                            selectedModel === 'lyria-3-clip-preview' ? "bg-amber-500/20 text-amber-400" : "text-gray-500 hover:text-gray-300"
+                          )}>Quick 30s</button>
+                        <button type="button" onClick={() => setSelectedModel('lyria-3-pro-preview')}
+                          className={cn("px-3 py-2 text-xs font-medium transition-colors",
+                            selectedModel === 'lyria-3-pro-preview' ? "bg-amber-500/20 text-amber-400" : "text-gray-500 hover:text-gray-300"
+                          )}>Full Song</button>
+                      </div>
+                      {/* Vocal mode */}
+                      <div className="flex rounded-lg border border-white/10 overflow-hidden">
+                        {(['auto', 'instrumental', 'with-vocals'] as const).map(mode => (
+                          <button key={mode} type="button" onClick={() => setVocalMode(mode)}
+                            className={cn("px-3 py-2 text-xs font-medium transition-colors capitalize",
+                              vocalMode === mode ? "bg-amber-500/20 text-amber-400" : "text-gray-500 hover:text-gray-300"
+                            )}>{mode === 'with-vocals' ? 'Vocals' : mode === 'instrumental' ? 'No Vocals' : 'Auto'}</button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
