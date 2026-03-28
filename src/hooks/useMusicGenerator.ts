@@ -22,13 +22,13 @@ export function useMusicGenerator() {
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const fullPrompt = buildLyriaPrompt(params);
 
-      const isInstrumental = params.vocalMode === "instrumental";
+      const wantsVocals = params.vocalMode === "with-vocals";
 
       const response = await ai.models.generateContentStream({
         model: params.model,
         contents: fullPrompt,
         config: {
-          responseModalities: isInstrumental ? ["AUDIO"] : ["AUDIO", "TEXT"],
+          responseModalities: wantsVocals ? ["AUDIO", "TEXT"] : ["AUDIO"],
         },
       });
 

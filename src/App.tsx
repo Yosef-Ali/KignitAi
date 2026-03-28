@@ -25,7 +25,7 @@ export default function App() {
   const [prompt, setPrompt] = useState('');
   const [selectedKignit, setSelectedKignit] = useState(KIGNITS[0].id);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [vocalMode, setVocalMode] = useState<'auto' | 'instrumental' | 'with-vocals'>('auto');
+  const [vocalMode, setVocalMode] = useState<'auto' | 'instrumental' | 'with-vocals'>('instrumental');
   const [selectedModel, setSelectedModel] = useState<'lyria-3-pro-preview' | 'lyria-3-clip-preview'>('lyria-3-pro-preview');
   
   const audioRef = useRef<HTMLAudioElement>(null);

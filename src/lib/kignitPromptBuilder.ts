@@ -27,17 +27,17 @@ export interface GenerationParams {
 
 const INSTRUMENTS: Record<string, InstrumentOption> = {
   krar: { id: "krar", name: "Krar", nameAmharic: "ክራር",
-    lyriaDescription: "krar (Ethiopian lyre), plucked string, bright clear ringing tone, shimmering metallic strings, warm overtones, each note sustains and rings beautifully, crystalline sweet sound, like classic Ethiopiques krar recordings" },
+    lyriaDescription: "African lyre with five or six metal strings, similar to a small harp but with a buzzy twangy resonance, plucked with a pick, dry warm tone with slight metallic buzz, pentatonic arpeggios, East African string instrument" },
   masinko: { id: "masinko", name: "Masinko", nameAmharic: "ማሲንቆ",
-    lyriaDescription: "masinko (Ethiopian one-string fiddle), bowed string, sweet nasal expressive tone, continuous legato, warm vibrato, singing quality" },
+    lyriaDescription: "single-string bowed instrument like an African fiddle or rebab, raw earthy nasal tone, not a smooth Western violin, rough textured bowing with heavy ornamental slides, East African folk fiddle sound" },
   washint: { id: "washint", name: "Washint", nameAmharic: "ዋሽንት",
-    lyriaDescription: "washint (Ethiopian bamboo flute), sweet breathy wooden flute, soft warm attack, delicate ornamental trills and grace notes" },
+    lyriaDescription: "simple bamboo end-blown flute, breathy airy tone like a ney flute or shakuhachi, warm woody sound with breath noise, not a concert flute, folk flute with ornamental trills" },
   kebero: { id: "kebero", name: "Kebero", nameAmharic: "ከበሮ",
-    lyriaDescription: "kebero (Ethiopian double-headed drum), deep resonant percussion, hand-struck, driving rhythm" },
+    lyriaDescription: "large African hand drum like a djembe, deep booming bass with sharp slaps, hand-struck goatskin, organic earthy percussion, not electronic drums" },
   begena: { id: "begena", name: "Begena", nameAmharic: "በገና",
-    lyriaDescription: "begena (Ethiopian large lyre), deep buzzing resonance, meditative and sacred, slow plucked strings" },
+    lyriaDescription: "large ten-string African lyre, deep buzzing resonant tone, meditative and sacred, slow deliberate plucking, each string buzzes against the bridge, drone-like quality" },
   saxophone: { id: "saxophone", name: "Saxophone", nameAmharic: "ሳክስፎን",
-    lyriaDescription: "alto saxophone, Ethio-jazz style, expressive vibrato, pentatonic improvisation" },
+    lyriaDescription: "alto saxophone, Ethio-jazz style, warm breathy tone with expressive vibrato, pentatonic improvisation, similar to jazz saxophone but with Ethiopian ornamental bends" },
 };
 
 export const KIGNIT_CONFIGS: Record<string, KignitConfig> = {
