@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# KignitAi — Ethiopian Music AI
 
-# Run and deploy your AI Studio app
+AI-powered Ethiopian music discovery and generation platform. Explore traditional Qenet scales, legendary artists, and generate authentic Habesha music.
 
-This contains everything you need to run your app locally.
+**Live Demo:** *[Coming soon — deploy to Vercel]*
 
-View your app in AI Studio: https://ai.studio/apps/81328f53-1036-4972-86c3-875a50f33ba1
+**Tech Stack:** Next.js · TypeScript · Tailwind CSS · Gemini API · Zustand
 
-## Run Locally
+## Screenshots
 
-**Prerequisites:**  Node.js
+> Add screenshots to `/screenshots/` folder.
 
+| Screen | File | What to capture |
+|--------|------|-----------------|
+| Home | `home.png` | Main music discovery / generation UI |
+| Generator | `generate.png` | Music generation interface |
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## What it does
+
+- Browse Ethiopian music by Qenet scale, artist, or era
+- AI-powered music generation with Ethiopian pentatonic scales
+- Artist database with Golden Era legends and modern stars
+- Traditional instrument profiles (Krar, Masenqo, Kebero, Washint, Begena)
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## License
+
+MIT
