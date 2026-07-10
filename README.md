@@ -1,8 +1,8 @@
 # KignitAi — Ethiopian Music AI
 
-AI-powered Ethiopian music discovery and generation platform. Explore traditional Qenet scales, legendary artists, and generate authentic Habesha music.
+> **Status:** Concept prototype — full implementation requires hosted inference infrastructure.
 
-**Live Demo:** *[Coming soon — deploy to Vercel]*
+AI-powered Ethiopian music discovery and generation platform. Explore traditional Qenet scales, legendary artists, and generate authentic Habesha music.
 
 **Tech Stack:** Next.js · TypeScript · Tailwind CSS · Gemini API · Zustand
 
